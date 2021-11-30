@@ -13,6 +13,12 @@ export class SearchBar extends Component {
         //this.setState({text : ''}); use this to clear the text on search bar after you search
     }
 
+    clearState = (e)=>{
+        e.preventDefault();
+        this.props.clearusers();
+    }
+
+
     render() {
         return (
             <div>
@@ -20,6 +26,7 @@ export class SearchBar extends Component {
                     <input type="text" name = "text" value={this.state.text} onChange={this.onChange}/>
                     <button type="submit" className="btn btn-dark btn-block"> Search </button>
                 </form>
+                {this.props.showBtn && <button  className="btn btn-light btn-block" onClick={this.clearState} > Clear </button>}
             </div>
         )
     }

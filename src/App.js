@@ -22,12 +22,18 @@ class App extends React.Component{
 
   }
 
+  clearUsers = ()=>{
+    this.setState({users : [], loading: false});
+  }
+
   render(){
   return(
     <div className="App">
       <Navbar title = "Github Finder" icon="fab fa-github"/>
       <div className="container">
-        <SearchBar searchUser={this.searchUser} />
+        <SearchBar searchUser={this.searchUser} clearusers={this.clearUsers} showBtn = {
+          this.state.users.length >0 ? true : false
+        }/>
         <User users = {this.state.users} loading = {this.state.loading}/>
 
       </div>
