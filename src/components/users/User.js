@@ -7,7 +7,8 @@ const User = (props)=>{
             if(props.loading){
                 return <Spinner />
             }else{
-                return(<div style={userStyle}>
+                return(
+                <div style={userStyle}>
                     {props.users.map(user =>{
                        return <UserItem key={user.id} user={user} />
                     })}
