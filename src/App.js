@@ -3,13 +3,15 @@ import "./App.css"
 import Navbar from "./components/Navbar";
 import User from "./components/users/User";
 import SearchBar from "./components/SearchBar";
+import { Alert } from "./components/Alert";
 import axios from 'axios';
 
 class App extends React.Component{
 
   state = {
     loading : false,
-    users : []
+    users : [],
+    alert : null 
   }
   async componentDidMount(){
     
@@ -26,14 +28,26 @@ class App extends React.Component{
     this.setState({users : [], loading: false});
   }
 
+  onAlert = (msg, type)=>{
+    this.setState({alert : {msg : msg, type: type}});
+    setTimeout(()=>{
+      this.setState({alert:null});
+    }, 5000);
+  }
+
   render(){
   return(
     <div className="App">
       <Navbar title = "Github Finder" icon="fab fa-github"/>
       <div className="container">
-        <SearchBar searchUser={this.searchUser} clearusers={this.clearUsers} showBtn = {
-          this.state.users.length >0 ? true : false
-        }/>
+        <Alert alert ={this.state.alert} />
+        <SearchBar 
+          searchUser={this.searchUser} 
+          clearusers={this.clearUsers} 
+          showBtn = {this.state.users.length >0 ? true : false}
+          alert = {this.onAlert}
+
+          />
         <User users = {this.state.users} loading = {this.state.loading}/>
 
       </div>

@@ -9,7 +9,15 @@ export class SearchBar extends Component {
 
     onSubmit = (e)=>{
         e.preventDefault();
-        this.props.searchUser(this.state.text);
+        
+        if(this.state.text === ""){
+            this.props.alert(
+                "Please enter something",
+                "light"
+            );
+        }else{
+            this.props.searchUser(this.state.text);
+        }
         //this.setState({text : ''}); use this to clear the text on search bar after you search
     }
 
